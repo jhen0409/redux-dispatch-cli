@@ -51,7 +51,7 @@ $ rrd connect --hostname <hostname> --port <port>
 
 It will create a daemon, the daemon process will exit when `$HOME/.remotedev_d_port` is removed.
 
-#### Show available instance List
+#### Show available instances
 
 ```bash
 $ rrd ls-instance
