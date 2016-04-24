@@ -57,7 +57,7 @@ It will create a daemon, the daemon process will exit when `$HOME/.remotedev_d_p
 $ rrd ls-instance
 ```
 
-Make sure have instance can dispatch action, wait your application start (restart). 
+Make sure have instance can dispatch action. 
 
 #### Select a instance (default: `auto`)
 
