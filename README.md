@@ -26,6 +26,9 @@ $ redux-dispatch ls-instance
 # Select instance
 $ redux-dispatch select <instance>
 
+# Sync currently selected instance states to all instances
+$ redux-dispatch sync
+
 # Dispatch action
 $ redux-dispatch action "{ type: 'ACTION', ... }"
 
@@ -70,10 +73,6 @@ $ rrd select <instanceKey>
 ```bash
 $ rrd action "{ type: 'ACTION', a: 1 }"
 ```
-
-## TODOs
-
-- [ ] [Enable sync](https://github.com/zalmoxisus/remotedev-app/blob/master/src/app/store/createRemoteStore.js#L28) command
 
 ## Credits
 

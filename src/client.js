@@ -61,6 +61,12 @@ export async function select(instance) {
   return post(`${host}/select`, { instance })
 }
 
+export async function sync() {
+  const running = await check()
+  if (!running) return NOT_RUNNING
+  return post(`${host}/sync`)
+}
+
 export async function action(obj) {
   const running = await check()
   if (!running) return NOT_RUNNING

@@ -30,6 +30,9 @@ require('yargs')
   .command('select', 'Select instance', noArg, function(argv) {
     client.select(argv._[1] || 'auto').then(log => console.log(log))
   })
+  .command('sync', 'Sync', noArg, function(argv) {
+    client.sync().then(log => console.log(log))
+  })
   .command('action', 'Dispatch action', noArg, function(argv) {
     if (!argv._[1]) return
     const getAction = new Function('return ' + argv._[1])

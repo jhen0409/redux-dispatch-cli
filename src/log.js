@@ -6,4 +6,5 @@ export const LAUNCH_FAILED = 'Daemon launch failed'
 
 export const NO_CONNECTION = 'No remotedev-server connection'
 export const NOT_FOUND_INSTANCE = 'Instance not found'
+export const NOT_SELECT_INSTANCE = 'Please select a instance'
 export const NO_TYPE = 'No `type` property'

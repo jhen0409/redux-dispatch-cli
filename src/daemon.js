@@ -3,15 +3,17 @@ import body from 'koa-bodyparser'
 import logger from 'koa-logger'
 import Router from 'koa-router'
 import * as portfile from './port'
-import { NO_CONNECTION, NOT_FOUND_INSTANCE, NO_TYPE } from './log'
+import { NO_CONNECTION, NOT_FOUND_INSTANCE, NOT_SELECT_INSTANCE, NO_TYPE } from './log'
 import {
   createRemoteStore,
   updateStoreInstance,
+  enableSync,
 } from 'remotedev-app/lib/store/createRemoteStore'
 
 let selectedInstance
 let instances
 let store
+let shouldSync
 
 const app = new Koa()
 app.use(logger())
@@ -30,6 +32,7 @@ router.post('/connect', async ctx => {
   const { hostname, port } = ctx.request.body
   selectedInstance = 'auto'
   instances = {}
+  shouldSync = false
   store = createRemoteStore({
     hostname,
     port,
@@ -45,6 +48,7 @@ router.post('/connect', async ctx => {
       if (selectedInstance === instance) {
         selectedInstance = 'auto'
         updateStoreInstance('auto')
+        shouldSync = false
         return
       }
     } else {
@@ -61,6 +65,7 @@ router.get('/ls-instance', haveConnection, async ctx => {
     output += `${instances[key]}\t\t${key}` + (selected ? '\t(Selected)' : '')
     output += '\n'
   })
+  output += `\nShould sync: ${shouldSync ? 'Yes' : 'No'}`
   ctx.body = output
 })
 
@@ -72,7 +77,18 @@ router.post('/select', haveConnection, async ctx => {
   }
   updateStoreInstance(instance || 'auto')
   selectedInstance = instance || 'auto'
+  shouldSync = false
   ctx.body = ''
+})
+
+router.post('/sync', haveConnection, async ctx => {
+  if (selectedInstance !== 'auto') {
+    shouldSync = true
+    enableSync(shouldSync)
+    ctx.body = ''
+    return
+  }
+  ctx.body = NOT_SELECT_INSTANCE
 })
 
 router.post('/action', haveConnection, async ctx => {
