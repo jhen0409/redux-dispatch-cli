@@ -29,13 +29,14 @@ const haveConnection = async (ctx, next) => {
 }
 
 router.post('/connect', async ctx => {
-  const { hostname, port } = ctx.request.body
+  const { hostname, port, secure } = ctx.request.body
   selectedInstance = 'auto'
   instances = {}
   shouldSync = false
   store = createRemoteStore({
     hostname,
     port,
+    secure,
     autoReconnect: true,
     autoReconnectOptions: {
       delay: 3E3,

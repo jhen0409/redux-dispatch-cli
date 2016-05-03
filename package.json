@@ -40,7 +40,7 @@
     "koa-router": "^7.0.1",
     "node-fetch": "^1.5.1",
     "node-watch": "^0.3.5",
-    "remotedev-app": "^0.3.6",
+    "remotedev-app": "^0.3.8",
     "yargs": "^4.6.0"
   },
   "devDependencies": {

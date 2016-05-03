@@ -18,10 +18,15 @@ require('yargs')
         alias: 'p',
         default: '8000'
       })
+      .option('secure', {
+        alias: 's',
+        default: false
+      })
   }, function(argv) {
     client.connect({
       hostname: argv.host,
-      port: argv.port
+      port: argv.port,
+      secure: !!argv.secure
     }).then(log => console.log(log))
   })
   .command('ls-instance', 'Show instance list', noArg, function() {
